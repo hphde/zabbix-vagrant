@@ -1,6 +1,6 @@
 #!/bin/bash
 #set -x
-TIMEZONE='Europe/Berlin'
+TIMEZONE=${3:-"Europe/Berlin"}
 PG_VER='12'
 NGX_VER='116'
 PHP_VER='72'

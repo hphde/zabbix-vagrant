@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
   CPUS = ENV['CPUS'] || 2
   BOOTSTRAP = ENV['BOOTSTRAP'] || 'bootstrap.sh'
   ZABBIXPORT = ENV['ZABBIXPORT'] || 8080
+  TIMEZONE = ENV['TIMEZONE'] || 'Europe/Berlin'
 
   NETWORK = IPAddr.new(NETWORK_BASE).mask(NETWORK_MASK)
   HOST_IP = NETWORK | IPAddr.new('0.0.0.3')
@@ -49,7 +50,7 @@ Vagrant.configure("2") do |config|
   #config.vm.synced_folder "data", "/data", :mount_options => ["dmode=777", "fmode=666"]
   
   # Bootstrapping
-  config.vm.provision "shell", path: BOOTSTRAP.to_s, args: [DB.to_s, WEBSERVER.to_s]
+  config.vm.provision "shell", path: BOOTSTRAP.to_s, args: [DB.to_s, WEBSERVER.to_s, TIMEZONE.to_s]
 
   # Show info
   if WEBSERVER == 'nginx'
