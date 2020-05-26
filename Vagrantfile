@@ -6,9 +6,10 @@ Vagrant.configure("2") do |config|
   WEBSERVER = ENV['WEBSERVER'] || 'apache'
   NETWORK_MASK = ENV['NETWORK_MASK'] || 24
   NETWORK_BASE = ENV['NETWORK_BASE'] || '192.168.56.0'
-  MEM = ENV['MEM'] || '1024'
-  CPUS = ENV['CPUS'] || '2'
+  MEM = ENV['MEM'] || 1024
+  CPUS = ENV['CPUS'] || 2
   BOOTSTRAP = ENV['BOOTSTRAP'] || 'bootstrap.sh'
+  ZABBIXPORT = ENV['ZABBIXPORT'] || 8080
 
   NETWORK = IPAddr.new(NETWORK_BASE).mask(NETWORK_MASK)
   HOST_IP = NETWORK | IPAddr.new('0.0.0.3')
@@ -37,7 +38,7 @@ Vagrant.configure("2") do |config|
 
   # Network Settings
   config.vm.network "private_network", ip: HOST_IP.to_s
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: ZABBIXPORT.to_s
 
   # Folder Settings
   # Disable the default share
@@ -56,5 +57,5 @@ Vagrant.configure("2") do |config|
   else
     URL = 'zabbix'
   end
-  config.vm.post_up_message = "Zabbix is available at http://localhost:8080/#{URL} or http://#{HOST_NAME}/#{URL}"
+  config.vm.post_up_message = "Zabbix is available at http://localhost:#{ZABBIXPORT}/#{URL} or http://#{HOST_NAME}/#{URL}"
 end

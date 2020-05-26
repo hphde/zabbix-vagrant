@@ -31,11 +31,13 @@ WEBSERVER='nginx'
 #BOOTSTRAP = 'bootstrap.sh'
 #NETWORK_MASK = 24
 #NETWORK_BASE = '192.168.56.0'
+ZABBIXPORT = 9090
 ```
 
-Zabbix is reachable over <http://localhost:8080/zabbix> if running in a local VM and over the machine it spits out in the end  
-For example <http://192-168-56-3.sslip.io/> (nginx) or <http://192-168-56-3.sslip.io/zabbix> (apache)
-
-Credentials are the Zabbix defaults `Admin/zabbix`
+Zabbix is reachable over the URLs that Vagrant spits out in the end. Credentials are the Zabbix defaults `Admin/zabbix`
 
 NOTE: The database password is generated randomly and stored under `/root/.DBPASSWORD` - if you remove/edit the file, contents will be regenerated/distributed.
+
+## Using without Vagrant
+
+You could run `bootstrap.sh` on CentOS 7 or 8 standalone and it will install Zabbiv 5 with MariaDB and Apache by default. The script accepts two parameters. The first is the database variant (`mysql` or `postgresql`) and the second the webserver variant (`apache` or `nginx`). It hasn't been tested on RHEL, so it might need some additional adjustments for that.
