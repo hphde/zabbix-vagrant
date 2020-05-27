@@ -22,7 +22,6 @@ case "$OS_MAJOR" in
     NGX_SERVICE="nginx"
     ZABBIX_NGXCFG='/etc/nginx/conf.d/zabbix.conf'
     ZABBIX_PHPCFG='/etc/php-fpm.d/zabbix.conf'
-    PG_VER='11' # currently no timescaledb-postgresql plugin for v12 available
     ;;
   *)
     echo "... unexpected. Use 7 or 8. Exiting"

@@ -13,8 +13,8 @@ Zabbix 5, MariaDB (mysql), Apache, CentOS 8
 
 NOTES:
 
-* MariaDB is v5.5 with CentOS7 and V10.3 with CentOS8
-* PostgreSQL12/CentOS8 has no TimescaleDB available yet, thus v11 is used
+* MariaDB is V5.5 with CentOS 7 and V10.3 with CentOS 8
+* PostgreSQL V12 including TimescaleDB is used on CentOS 7 and 8
 
 ## Howto
 

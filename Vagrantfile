@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
   # sync on up or reload
   #config.vm.synced_folder "data", "/data", type: "rsync", rsync__exclude: ".git/"
   # shared folder works only with vbox guest additions
+  # vagrant plugin install vagrant-vbguest
   #config.vm.synced_folder "data", "/data", :mount_options => ["dmode=777", "fmode=666"]
   
   # Bootstrapping
