@@ -1,5 +1,7 @@
 Vagrant.configure("2") do |config|
+  # vagrant plugin install vagrant-env
   config.env.enable
+  ephemeralport = TCPServer.new('localhost', 0).addr[1]
 
   BOX = ENV['BOX'] || 'centos/8'
   DB = ENV['DB'] || 'mysql'
@@ -9,7 +11,7 @@ Vagrant.configure("2") do |config|
   MEM = ENV['MEM'] || 1024
   CPUS = ENV['CPUS'] || 2
   BOOTSTRAP = ENV['BOOTSTRAP'] || 'bootstrap.sh'
-  ZABBIXPORT = ENV['ZABBIXPORT'] || 8080
+  ZABBIXPORT = ENV['ZABBIXPORT'] || ephemeralport
   TIMEZONE = ENV['TIMEZONE'] || 'Europe/Berlin'
 
   NETWORK = IPAddr.new(NETWORK_BASE).mask(NETWORK_MASK)
@@ -17,15 +19,10 @@ Vagrant.configure("2") do |config|
   # sslip.io nip.io xip.io
   DNS_PROVIDER = "sslip.io"
   HOST_NAME = "#{HOST_IP.to_s.gsub('.','-')}.#{DNS_PROVIDER}"
-end
-
-Vagrant.configure("2") do |config|
-  config.vm.box_check_update = false
-
-  # vagrant plugin install vagrant-env
 
   # Type
   config.vm.box = BOX.to_s
+  config.vm.box_check_update = false
 
   # Use generated hostname
   config.vm.hostname = HOST_NAME.to_s
