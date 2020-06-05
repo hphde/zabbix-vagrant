@@ -1,18 +1,17 @@
 Vagrant.configure("2") do |config|
   # vagrant plugin install vagrant-env
   config.env.enable
-  ephemeralport = TCPServer.new('localhost', 0).addr[1]
 
-  BOX = ENV['BOX'] || 'centos/8'
-  DB = ENV['DB'] || 'mysql'
-  WEBSERVER = ENV['WEBSERVER'] || 'apache'
-  NETWORK_MASK = ENV['NETWORK_MASK'] || 24
-  NETWORK_BASE = ENV['NETWORK_BASE'] || '192.168.56.0'
-  MEM = ENV['MEM'] || 1024
-  CPUS = ENV['CPUS'] || 2
-  BOOTSTRAP = ENV['BOOTSTRAP'] || 'bootstrap.sh'
-  ZABBIXPORT = ENV['ZABBIXPORT'] || ephemeralport
-  TIMEZONE = ENV['TIMEZONE'] || 'Europe/Berlin'
+  BOX           = ENV['BOX']           || 'centos/8'
+  DB            = ENV['DB']            || 'mysql'
+  WEBSERVER     = ENV['WEBSERVER']     || 'apache'
+  NETWORK_MASK  = ENV['NETWORK_MASK']  || 24
+  NETWORK_BASE  = ENV['NETWORK_BASE']  || '192.168.56.0'
+  MEM           = ENV['MEM']           || '1024'
+  CPUS          = ENV['CPUS']          || '2'
+  BOOTSTRAP     = ENV['BOOTSTRAP']     || 'bootstrap.sh'
+  ZABBIXPORT    = ENV['ZABBIXPORT']    || TCPServer.new('localhost', 0).addr[1]
+  TIMEZONE      = ENV['TIMEZONE']      || 'Europe/Berlin'
 
   NETWORK = IPAddr.new(NETWORK_BASE).mask(NETWORK_MASK)
   HOST_IP = NETWORK | IPAddr.new('0.0.0.3')
